@@ -8,13 +8,18 @@ d = OrderedDict(:Apl => "apple",
 	 	:Brc => "birch",
 	 	:Cnd => "candle",
 	 	:Drn => "dragon",
-	 	:Exp => "expensive")
+	 	:Exp => "expensive",
+		:Frg => "forage",
+		:Gra => "grain",
+		:Hlt => "health")
 
-dxs = d(2, 4:5)
+dxs = d(2, 4:5, [7,8])
 
-OrderedDict{Symbol,String} with 3 entries:
+OrderedDict{Symbol,String} with 5 entries:
   :Brc => "birch"
   :Drn => "dragon"
   :Exp => "expensive"
+  :Grn => "grain"
+  :Hlt => "health"
 						 
 ```
