@@ -10,11 +10,11 @@ d = OrderedDict(:Apl => "apple",
 	 	:Drn => "dragon",
 	 	:Exp => "expensive")
 
-dxs = d(2, 3:4)
+dxs = d(2, 4:5)
 
 OrderedDict{Symbol,String} with 3 entries:
-  :brc => "birch"
-  :cnd => "candle"
-  :drn => "dragon"
+  :Brc => "birch"
+  :Drn => "dragon"
+  :Exp => "expensive"
 						 
 ```
