@@ -1,5 +1,7 @@
 module DictionaryIndexing
 
+using OrderedCollections
+
 (D::Dict)(i::Int) = Dict([keys(D)...][i] => [values(D)...][i])
 (D::OrderedDict)(i::Int) = OrderedDict([keys(D)...][i] => [values(D)...][i])
 (D::Dict)(is::AbstractVector{Int}) = Dict([([keys(D)...][i],[values(D)...][i]) for i in is])
@@ -10,6 +12,7 @@ module DictionaryIndexing
 (D::OrderedDict)(is::AbstractRange{Int}) = D([is...])
 (D::Dict)(is::AbstractRange{Int}...) = D([(is...)...])
 (D::OrderedDict)(is::AbstractRange{Int}...) = D([(is...)...])
+
 function (D::AbstractDict)(is...)
     indices = []
     for i in is
