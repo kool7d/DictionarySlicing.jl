@@ -1,6 +1,7 @@
 # DictionaryIndexing
 
 Dictionary indexing can be useful if, for instance, you don't remember the key for something but you know what place it is in.
+**Warning** this package commits "type piracy" since it adds functionality to existing types (AbstractDicts). So only pirates should use this.
 
 Example:
 ```
