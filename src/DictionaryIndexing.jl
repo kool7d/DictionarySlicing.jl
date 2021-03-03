@@ -29,3 +29,5 @@ function (D::AbstractDict)(is...)
     end
     return D(indices...)
 end
+
+end
