@@ -2,10 +2,10 @@ module DictionaryIndexing
 
 using OrderedCollections
 
-function (D::AbstractDict)(is...)
+function (D::AbstractDict)(idxs...)
     indices = []
-    for i in is
-        if typeof(i) <: Union{AbstractRange{Int},AbstractArray}
+    for i in idxs
+        if typeof(i) <: Union{AbstractRange,AbstractArray}
             for j in i
                 push!(indices,j)
             end
