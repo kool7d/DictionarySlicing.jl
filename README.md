@@ -34,7 +34,7 @@ dxs = dd(2, 4:5, [7,8], 5:length(dd), [8,5])    # instead of `end` we get the la
 	  :Irn => "irony"			 #  9
 	  :Jak => "jackal"			 #  10
 ```
-Overlaps are handled such that same `key => value` pairs are not added again. This behavior is inherent to Dicts. If you want to change this to keep the last occurrence, use the keyword argument `keep = :last` (or `keep = "last"`).
+Overlaps are handled such that same `key => value` pairs are not added again. If you want to change this to keep the last occurrence, use the keyword argument `keep = :last` (or `keep = "last"`).
 ```
 dxs = dd(2, 4:5, [7,8], 5:length(dd), [8,5]; keep = :last)
 
