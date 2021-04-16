@@ -1,8 +1,6 @@
 # DictionaryIndexing
 
-Dictionary indexing can be useful if you don't remember the key for something but you know what place it is in sequentially. It might also
-be useful if you want to throw indices at feature or property dictionaries.
-It imports only 1 package (OrderedCollections) and has 1 function that enables indexing/slicing ordered dictionaries using function syntax. 
+Dictionary indexing imports only 1 package (OrderedCollections) and has 1 function that enables indexing/slicing ordered dictionaries using function syntax. 
 If you want to use it for another dict type you can convert it to an OrderedDict first.
 
 Example:
