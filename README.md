@@ -1,11 +1,9 @@
 # DictionaryIndexing
 
-Dictionary indexing can be useful if, for instance, you don't remember the key for something but you know what place it is in sequentially. Might also
+Dictionary indexing can be useful if you don't remember the key for something but you know what place it is in sequentially. It might also
 be useful if you want to throw indices at feature or property dictionaries.
-**Warning** this package commits *type piracy* since it adds functionality to existing types (AbstractDicts). So only pirates should use this. 
-
-It imports only 1 package (OrderedCollections) and has 1 function that enables indexing dictionaries using function syntax.
-This should work for any T<:AbstractDict, not just OrderedDict, but note that indices/entries may not be ordered as you'd expect.
+It imports only 1 package (OrderedCollections) and has 1 function that enables indexing/slicing ordered dictionaries using function syntax. 
+If you want to use it for another dict type you can convert it to an OrderedDict first.
 
 Example:
 ```
