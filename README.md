@@ -49,13 +49,13 @@ OrderedDict{Symbol, String} with 8 entries:
 ```
 If you want to do more complicated things like filtering the collected indices you can use the `filter` keyword with any filtering function.
 ```
-dd(2, 4:5, [7,8], 5:length(dd), [8,5]; filter = x->in(x,5:6))
+dxs = dd(2, 4:5, [7,8], 5:length(dd), [8,5]; filter = x->in(x,5:6))
 
 OrderedDict{Symbol, String} with 2 entries:
   :Exp => "expensive"			 #  5
   :Frg => "forage"			 #  6
 
-dd(2, 4:5, [7,8], 5:length(dd), [8,5]; keep = :last, filter = x->in(x,5:6))
+dxs = dd(2, 4:5, [7,8], 5:length(dd), [8,5]; keep = :last, filter = x->in(x,5:6))
 
 OrderedDict{Symbol, String} with 2 entries:
   :Frg => "forage"			 #  6
