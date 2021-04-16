@@ -2,7 +2,7 @@ module DictionaryIndexing
 
 using OrderedCollections
 
-function (D::AbstractDict)(idxs...; keep = :first, filter = nothing)
+function (D::OrderedDict)(idxs...; keep = :first, filter = nothing)
     indices = []
 
     for i in idxs
