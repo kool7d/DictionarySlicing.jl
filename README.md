@@ -21,7 +21,7 @@ dxs = slice(dd, 4)
 	OrderedDict{Symbol, String} with 1 entry:
 	  :Drn => "dragon"
 
-dxs = slice(dd, 2, 4:5, [7,8], 5:length(dd), [8,5])    # instead of `end` we get the last index with `length`
+dxs = slice(dd, 2, 4:5, [7,8], 5:length(dd), [8,5])  # instead of `end` we get the last index with `length`
 
 	OrderedDict{Symbol, String} with 8 entries:
 	  :Brc => "birch"           		 #  2
@@ -79,13 +79,13 @@ dd = OrderedDict(:Apl => "apple",
 		 :Gra => "grain",
 		 :Hlt => "health",
 		 :Irn => "irony",
-		 :Jak => "jackal" )     # length is 10
+		 :Jak => "jackal" )
 dxs = dd(4)
 
 	OrderedDict{Symbol, String} with 1 entry:
 	  :Drn => "dragon"
 
-dxs = dd(2, 4:5, [7,8], 5:length(dd), [8,5])    # instead of `end` we get the last index with `length`
+dxs = dd(2, 4:5, [7,8], 5:length(dd), [8,5]) 
 
 	OrderedDict{Symbol, String} with 8 entries:
 	  :Brc => "birch"           		 #  2
