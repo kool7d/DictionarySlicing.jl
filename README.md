@@ -102,7 +102,7 @@ dxs = dd(2, 4:5, [7,8], 5:length(dd), [8,5])
 	  :Irn => "irony"			 #  9
 	  :Jak => "jackal"			 #  10
 
-dxs = [2, 4:5] |> dd	# easy piping
+dxs = [2, 4:5] |> dd	# easy piping. throw numbers at it
 
 	OrderedDict{Symbol, String} with 3 entries:
 	  :Brc => "birch"           		 #  2
