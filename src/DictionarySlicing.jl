@@ -2,14 +2,14 @@ module DictionarySlicing
 
 using OrderedCollections
 
-function collectall(args...)
+function collectall(args...; maxdepth = 5, currentdepth = 1)
 	ff = []
 	f1 = collect([args...])
 	f2 = collect([Base.Iterators.flatten(f1)...])
 	for x in f2
-		if typeof(x) <: Union{AbstractArray,AbstractRange}
+		if typeof(x) <: Union{AbstractArray,AbstractRange} && currentdepth < maxdepth
 			xx = collect([Base.Iterators.flatten(x)...])
-			push!(ff,collectall(xx)...)
+			push!(ff,collectall(xx; maxdepth, currentdepth = currentdepth+1)...)
 		else
 			push!(ff,x)
 		end
