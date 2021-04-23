@@ -1,7 +1,7 @@
-name = "DictionaryIndexing"
-uuid = "ad5dd64e-dea8-4d37-96e4-0049a8e21092"
+name = "DictionarySlicing"
+uuid = "a912d89d-ef62-4f6b-8cba-1b09a150679e"
 authors = ["Dan Kool"]
-version = "0.3.1"
+version = "0.4.0"
 
 [deps]
 OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
