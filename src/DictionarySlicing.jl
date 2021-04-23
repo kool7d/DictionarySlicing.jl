@@ -2,20 +2,24 @@ module DictionarySlicing
 
 using OrderedCollections
 
-function slice(D::T, idxs...; keep = :first, filter = nothing) where {T<:AbstractDict}
-    indices = []
+function collectall(args...)
+	ff = []
+	f1 = collect([args...])
+	f2 = collect([Base.Iterators.flatten(f1)...])
+	for x in f2
+		if typeof(x) <: Union{AbstractArray,AbstractRange}
+			xx = collect([Base.Iterators.flatten(x)...])
+			push!(ff,collectall(xx)...)
+		else
+			push!(ff,x)
+		end
+	end
+	return ff
+end
 
-    for i in idxs
-        if typeof(i) <: Union{AbstractRange{Int},AbstractArray{Int}}
-            for j in i
-                push!(indices,j)
-            end
-        elseif typeof(i) <: Integer
-            push!(indices,i)
-        else
-            error("could not index this, arguments must be Ints, ranges of Ints, or arrays of Ints")
-        end
-    end
+function slice(D::T, idxs...; keep = :first, filter = nothing) where {T<:AbstractDict}
+	indices = collectall(idxs...)
+
 	if filter != nothing
 		try
 			if keep == :lastbefore || keep == "lastbefore"
@@ -48,19 +52,8 @@ end
 
 function directslicing()
 	@eval(function (D::OrderedDict)(idxs...; keep = :first, filter = nothing)
-	    indices = []
+		indices = collectall(idxs...)
 
-	    for i in idxs
-	        if typeof(i) <: Union{AbstractRange{Int},AbstractArray{Int}}
-	            for j in i
-	                push!(indices,j)
-	            end
-	        elseif typeof(i) <: Integer
-	            push!(indices,i)
-	        else
-	            error("could not index this, arguments must be Ints, ranges of Ints, or arrays of Ints")
-	        end
-	    end
 		if filter != nothing
 			try
 				if keep == :lastbefore || keep == "lastbefore"
