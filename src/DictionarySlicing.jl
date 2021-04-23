@@ -2,6 +2,8 @@ module DictionarySlicing
 
 using OrderedCollections
 
+export slice, directslicing
+
 function collectall(args...; maxdepth = 5, currentdepth = 1)
 	ff = []
 	f1 = collect([args...])
