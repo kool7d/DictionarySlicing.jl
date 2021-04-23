@@ -2,9 +2,18 @@ module DictionarySlicing
 
 using OrderedCollections
 
-export slice, directslicing
+export collectall, slice, directslicing
 
-function collectall(args...; maxdepth = 5, currentdepth = 1)
+"""
+    collectall(sets...; maxdepth=5)
+
+Recursively collects elements from `sets`.
+
+Keyword args:
+maxdepth --------- determines maximum recursion level
+currentdepth ----- currect recursion level
+"""
+function collectall(args...; maxdepth = 5, currentdepth = 1)	# if you are reading this, where should this go? I feel like it belongs elsewhere...
 	ff = []
 	f1 = collect([args...])
 	f2 = collect([Base.Iterators.flatten(f1)...])
@@ -19,6 +28,15 @@ function collectall(args...; maxdepth = 5, currentdepth = 1)
 	return ff
 end
 
+"""
+    slice(D::T, idxs...; keep = :first, filter = nothing) where {T<:AbstractDict}
+
+Returns the slices from dict `D`.
+
+Keyword args:
+keep --------- either keep the :first or :last instance of a slice
+filter ------- true/false-returning function to apply to collected indices
+"""
 function slice(D::T, idxs...; keep = :first, filter = nothing) where {T<:AbstractDict}
 	indices = collectall(idxs...)
 
@@ -51,7 +69,11 @@ function slice(D::T, idxs...; keep = :first, filter = nothing) where {T<:Abstrac
 
     return T(ks.=>vs)
 end
+"""
+    directslicing()
 
+Activates indexing/slicing for OrderedDict with function indexing.
+"""
 function directslicing()
 	@eval(function (D::OrderedDict)(idxs...; keep = :first, filter = nothing)
 		indices = collectall(idxs...)
