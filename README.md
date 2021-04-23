@@ -65,7 +65,7 @@ dxs = slice(dd, 2, 4:5, [7,8], 5:length(dd), [8,5]; keep = :last, filter = x->in
 Ordinarily `keep = :last` occurs after filtering, but if for some reason you want it to happen before the filter use `keep = :lastbefore`. Likewise, if you want it to keep the first instance before filtering, do `keep = :firstbefore`. This is possibly desirable if your filter function involves the number of occurrences.
 
 
-The function syntax version gives some additional flexibility. Only works with OrderedDict, to avoid clashes, so convert your dict to an OrderedDict to use this.
+The function syntax version gives some additional flexibility. It only works with OrderedDict, so convert your dict to an OrderedDict to use this.
 Usually this just means using the constructor like `newdict = OrderedDict(olddict)`.
 
 Example using function syntax:
