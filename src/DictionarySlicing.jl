@@ -13,7 +13,7 @@ Keyword args:
 maxdepth --------- determines maximum recursion level
 currentdepth ----- currect recursion level
 """
-function collectall(args...; maxdepth = 5, currentdepth = 1)	# if you are reading this, where should this go? I feel like it belongs elsewhere...
+function collectall(args...; maxdepth = 5, currentdepth = 1)	# if you are reading this, where should `collectall` go? I feel like it belongs elsewhere...
 	ff = []
 	f1 = collect([args...])
 	f2 = collect([Base.Iterators.flatten(f1)...])
