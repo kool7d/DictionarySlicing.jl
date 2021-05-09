@@ -9,22 +9,35 @@ export collectall, slice, directslicing
 
 Recursively collects elements from `sets`.
 
-Keyword args:
+Keyword arguments:
 maxdepth --------- determines maximum recursion level
-currentdepth ----- currect recursion level
+currentdepth ----- current recursion level
 """
-function collectall(args...; maxdepth = 5, currentdepth = 1)	# if you are reading this, where should `collectall` go? I feel like it belongs elsewhere...
+function collectall(sets...; maxdepth = 5, currentdepth = 1)
 	ff = []
-	f1 = collect([args...])
+	f1 = collect([sets...])
 	f2 = collect([Base.Iterators.flatten(f1)...])
-	for x in f2
+
+    for x in f2
 		if typeof(x) <: Union{AbstractArray,AbstractRange} && currentdepth < maxdepth
-			xx = collect([Base.Iterators.flatten(x)...])
+			xx = try
+                collect([Base.Iterators.flatten(x)...])
+            catch
+                collect(x)
+            end
 			push!(ff,collectall(xx; maxdepth, currentdepth = currentdepth+1)...)
 		else
 			push!(ff,x)
 		end
 	end
+    
+	typ = typeof(ff[1])
+    try
+        ff = Vector{typ}(ff)
+    catch
+
+    end
+    
 	return ff
 end
 
