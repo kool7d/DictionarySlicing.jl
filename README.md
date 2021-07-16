@@ -2,7 +2,7 @@
 
 Enables slicing dictionaries with `sliced`, or directly by using function syntax.
 
-Example using slice:
+Example using sliced:
 ```julia
 using DictionarySlicing
 
