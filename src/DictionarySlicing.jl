@@ -2,7 +2,7 @@ module DictionarySlicing
 
 using OrderedCollections
 
-export collectall, slice, directslicing
+export collectall, sliced, directslicing
 
 """
     collectall(sets...; maxdepth=5)
@@ -47,7 +47,7 @@ end
 Returns the slices from dict `D`.
 
 Keyword args:
-keep --------- either keep the :first or :last instance of a slice
+keep --------- either keep the :first or :last instance of a sliced
 filter ------- true/false-returning function to apply to collected indices
 """
 function sliced(D::T, idxs...; keep = :first, filter = nothing) where {T<:AbstractDict}
@@ -58,12 +58,12 @@ function sliced(D::T, idxs...; keep = :first, filter = nothing) where {T<:Abstra
 			if keep == :lastbefore || keep == "lastbefore"
 				revindices = reverse(indices)
 				revindices = Base.filter(filter,revindices)
-				dd = OrderedDict([([keys(D)...][i],[values(D)...][i]) for i in revindices])
-				rv = length(dd):-1:1
-				return slice(dd,rv...)
+				od = OrderedDict([([keys(D)...][i],[values(D)...][i]) for i in revindices])
+				rv = length(od):-1:1
+				return sliced(od,rv...)
 			elseif keep == :firstbefore || keep == "firstbefore"
 				indices = unique(indices)
-				return slice(D,indices...; filter = filter)
+				return sliced(D,indices...; filter = filter)
 			else
 				indices = Base.filter(filter,indices)
 			end
@@ -73,9 +73,9 @@ function sliced(D::T, idxs...; keep = :first, filter = nothing) where {T<:Abstra
 	end
 	if keep == :last || keep == "last"
 		revindices = reverse(indices)
-		dd = OrderedDict([([keys(D)...][i],[values(D)...][i]) for i in revindices])
-		rv = length(dd):-1:1
-		return slice(dd,rv...)
+		od = OrderedDict([([keys(D)...][i],[values(D)...][i]) for i in revindices])
+		rv = length(od):-1:1
+		return sliced(od,rv...)
 	end
 	ks = [[keys(D)...][i] for i in indices]
 	vs = [[values(D)...][i] for i in indices]
@@ -85,7 +85,7 @@ end
 """
     directslicing()
 
-Activates indexing/slicing for OrderedDict with function indexing.
+Activates indexing/slicing for Ordereodict with function indexing.
 """
 function directslicing()
 	@eval(function (D::OrderedDict)(idxs...; keep = :first, filter = nothing)
