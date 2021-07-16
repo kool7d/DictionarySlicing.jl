@@ -36,7 +36,7 @@ dxs = sliced(od, 2, 4:5, [7,8], 5:length(od), [8,5])  # instead of `end` we get 
 ```
 Overlaps are handled such that same `key => value` pairs are not added again. If you want to change this to keep the last occurrence, use the keyword argument `keep = :last` (or `keep = "last"`).
 ```julia
-dxs = sliced(od, 2, 4:5, [7,8], 5:length(dd), [8,5]; keep = :last)
+dxs = sliced(od, 2, 4:5, [7,8], 5:length(od), [8,5]; keep = :last)
 
 	OrderedDict{Symbol, String} with 8 entries:
 	  :Brc => "birch"		    	 #  2
@@ -50,13 +50,13 @@ dxs = sliced(od, 2, 4:5, [7,8], 5:length(dd), [8,5]; keep = :last)
 ```
 If you want to do more complicated things like filtering the collected indices you can use the `filter` keyword with any filtering function.
 ```julia
-dxs = sliced(dd, 2, 4:5, [7,8], 5:length(dd), [8,5]; filter = x->in(x,5:6))
+dxs = sliced(od, 2, 4:5, [7,8], 5:length(od), [8,5]; filter = x->in(x,5:6))
 
 	OrderedDict{Symbol, String} with 2 entries:
 	  :Exp => "expensive"			 #  5
 	  :Frg => "forage"			 #  6
 
-dxs = sliced(dd, 2, 4:5, [7,8], 5:length(dd), [8,5]; keep = :last, filter = x->in(x,5:6))
+dxs = sliced(od, 2, 4:5, [7,8], 5:length(od), [8,5]; keep = :last, filter = x->in(x,5:6))
 
 	OrderedDict{Symbol, String} with 2 entries:
 	  :Frg => "forage"			 #  6
@@ -90,7 +90,7 @@ dxs = od(4)
 	OrderedDict{Symbol, String} with 1 entry:
 	  :Drn => "dragon"
 
-dxs = od(2, 4:5, [7,8], 5:length(dd), [8,5])
+dxs = od(2, 4:5, [7,8], 5:length(od), [8,5])
 
 	OrderedDict{Symbol, String} with 8 entries:
 	  :Brc => "birch"           		 #  2
