@@ -1,13 +1,12 @@
 name = "DictionarySlicing"
 uuid = "a912d89d-ef62-4f6b-8cba-1b09a150679e"
 authors = ["Dan Kool"]
-version = "0.4.0"
+version = "0.5.0"
 
 [deps]
 OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 
 [compat]
-OrderedCollections = "1.4"
 julia = "1"
 
 [extras]
