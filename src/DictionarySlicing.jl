@@ -85,7 +85,8 @@ end
 """
     directslicing()
 
-Activates indexing/slicing for Ordereodict with function indexing.
+Activates indexing/slicing for OrderedDict with function indexing.
+`dict(2,3)` returns an OrderedDict of the 2nd and 3rd entry.
 """
 function directslicing()
 	@eval(function (D::OrderedDict)(idxs...; keep = :first, filter = nothing)
