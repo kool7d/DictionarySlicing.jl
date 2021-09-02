@@ -51,8 +51,17 @@ keep --------- either keep the :first or :last instance of a sliced
 filter ------- true/false-returning function to apply to collected indices
 """
 function sliced(D::T, idxs...; keep = :first, filter = nothing) where {T<:AbstractDict}
-	indices = collectall(idxs...)
-
+	inputs = collectall(idxs...)
+	_keys = []
+	_indices = []
+	for i in 1:size(inputs,1)
+		if typeof(inputs[i])<:AbstractString
+			push!(_keys,(i,inputs[i]))
+		else
+			push!(_indices,(i,inputs[i]))
+		end
+	end
+	
 	if filter != nothing
 		try
 			if keep == :lastbefore || keep == "lastbefore"
