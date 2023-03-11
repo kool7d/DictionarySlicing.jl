@@ -3,7 +3,7 @@ module DictionarySlicing
 using Reexport
 @reexport using OrderedCollections
 
-export collectall, sliced, directslicing, reversekv, printkv
+export collectall, sliced, directslicing, reversekv, printkv, collectkeys, collectvals, typefields
 
 function collectkeys(args)
     return keys(args) |> collect
