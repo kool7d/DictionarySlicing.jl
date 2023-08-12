@@ -122,15 +122,15 @@ using DictionarySlicing
 directslicing()		# need to call this function to activate it.
 
 odict = OrderedDict(:Apl => "apple",
-		 :Brc => "birch",
-		 :Cnd => "candle",
-		 :Drn => "dragon",
-		 :Exp => "expensive",
-		 :Frg => "forage",
-		 :Gra => "grain",
-		 :Hlt => "health",
-		 :Irn => "irony",
-		 :Jak => "jackal" )
+		    :Brc => "birch",
+		    :Cnd => "candle",
+		    :Drn => "dragon",
+		    :Exp => "expensive",
+		    :Frg => "forage",
+		    :Gra => "grain",
+		    :Hlt => "health",
+		    :Irn => "irony",
+		    :Jak => "jackal" )
 
 dxs = odict(4)
 
