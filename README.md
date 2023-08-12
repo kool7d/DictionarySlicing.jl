@@ -6,23 +6,28 @@ Example using `sliced`:
 ```julia
 using DictionarySlicing
 
-od = OrderedDict(:Apl => "apple",
-		 :Brc => "birch",
-		 :Cnd => "candle",
-		 :Drn => "dragon",
-		 :Exp => "expensive",
-		 :Frg => "forage",
-		 :Gra => "grain",
-		 :Hlt => "health",
-		 :Irn => "irony",
-		 :Jak => "jackal" )     # length is 10
+odict = OrderedDict(:Apl => "apple",
+		    :Brc => "birch",
+		    :Cnd => "candle",
+		    :Drn => "dragon",
+		    :Exp => "expensive",
+		    :Frg => "forage",
+		    :Gra => "grain",
+		    :Hlt => "health",
+		    :Irn => "irony",
+		    :Jak => "jackal" )     # length is 10
 
-dxs = sliced(od, 4)
+dxs = sliced(odict, 4)
 
 	OrderedDict{Symbol, String} with 1 entry:
 	  :Drn => "dragon"
 
-dxs = sliced(od, 2, 4:5, [7,8], 5:length(od), [8,5])  # instead of `end`, get the last index with `length`
+dxs = sliced(odict,
+		2,
+		4:5,
+		[7,8],
+		5:length(odict),	# instead of `end`, get the last index with `length`
+		[8,5])  
 
 	OrderedDict{Symbol, String} with 8 entries:
 	  :Brc => "birch"           		 #  2
@@ -36,7 +41,13 @@ dxs = sliced(od, 2, 4:5, [7,8], 5:length(od), [8,5])  # instead of `end`, get th
 ```
 Overlaps are handled such that same `key => value` pairs are not added again. If you want to change this to keep the last occurrence, use the keyword argument `keep = :last` (or `keep = "last"`).
 ```julia
-dxs = sliced(od, 2, 4:5, [7,8], 5:length(od), [8,5]; keep = :last)
+dxs = sliced(odict,
+		2,
+		4:5,
+		[7,8],
+		5:length(odict),
+		[8,5];
+		keep = :last)
 
 	OrderedDict{Symbol, String} with 8 entries:
 	  :Brc => "birch"		    	 #  2
@@ -50,13 +61,26 @@ dxs = sliced(od, 2, 4:5, [7,8], 5:length(od), [8,5]; keep = :last)
 ```
 If you want to do more complicated things like filtering the collected indices you can use the `filter` keyword with any filtering function.
 ```julia
-dxs = sliced(od, 2, 4:5, [7,8], 5:length(od), [8,5]; filter = x->in(x,5:6))
+dxs = sliced(odict,
+		2,
+		4:5,
+		[7,8],
+		5:length(odict),
+		[8,5];
+		filter = x->in(x,5:6))
 
 	OrderedDict{Symbol, String} with 2 entries:
 	  :Exp => "expensive"			 #  5
 	  :Frg => "forage"			 #  6
 
-dxs = sliced(od, 2, 4:5, [7,8], 5:length(od), [8,5]; keep = :last, filter = x->in(x,5:6))
+dxs = sliced(odict,
+		2,
+		4:5,
+		[7,8],
+		5:length(odict),
+		[8,5];
+		keep = :last,
+		filter = x->in(x,5:6))
 
 	OrderedDict{Symbol, String} with 2 entries:
 	  :Frg => "forage"			 #  6
@@ -67,7 +91,13 @@ Ordinarily `keep = :last` occurs after filtering, but if for some reason you wan
 Since we are working with dictionaries, we are often dealing with keys that are Symbols or Strings. These keys also work, instead of or in combination with numbers.
 
 ```julia
-dxs = sliced(od, 2, 4:5, [7,8], 5:length(od), [8,5], :Apl) 
+dxs = sliced(odict,
+		2,
+		4:5,
+		[7,8],
+		5:length(odict),
+		[8,5],
+		:Apl) 
 
 	OrderedDict{Symbol, String} with 8 entries:
 	  :Brc => "birch"           		 #  2
@@ -91,7 +121,7 @@ using DictionarySlicing
 
 directslicing()		# need to call this function to activate it.
 
-od = OrderedDict(:Apl => "apple",
+odict = OrderedDict(:Apl => "apple",
 		 :Brc => "birch",
 		 :Cnd => "candle",
 		 :Drn => "dragon",
@@ -102,12 +132,12 @@ od = OrderedDict(:Apl => "apple",
 		 :Irn => "irony",
 		 :Jak => "jackal" )
 
-dxs = od(4)
+dxs = odict(4)
 
 	OrderedDict{Symbol, String} with 1 entry:
 	  :Drn => "dragon"
 
-dxs = od(2, 4:5, [7,8], 5:length(od), [8,5])
+dxs = odict(2, 4:5, [7,8], 5:length(odict), [8,5])
 
 	OrderedDict{Symbol, String} with 8 entries:
 	  :Brc => "birch"           		 #  2
@@ -119,14 +149,15 @@ dxs = od(2, 4:5, [7,8], 5:length(od), [8,5])
 	  :Irn => "irony"			 #  9
 	  :Jak => "jackal"			 #  10
 
-dxs = [2, 4:5] |> od	# easy piping. throw numbers at it
+dxs = [2, 4:5] |> odict	# easy piping. throw numbers at it
 
 	OrderedDict{Symbol, String} with 3 entries:
 	  :Brc => "birch"           		 #  2
 	  :Drn => "dragon"			 #  4
 	  :Exp => "expensive"		 	 #  5
 
-dxs = od(2, 4:5, [7,8], 5:length(od), [8,5]; keep = :last)
+dxs = odict(2, 4:5, [7,8], 5:length(odict), [8,5];
+		keep = :last)
 
 	OrderedDict{Symbol, String} with 8 entries:
 	  :Brc => "birch"		    	 #  2
@@ -138,13 +169,16 @@ dxs = od(2, 4:5, [7,8], 5:length(od), [8,5]; keep = :last)
 	  :Hlt => "health"			 #  8
 	  :Exp => "expensive"			 #  5
 
-dxs = od(2, 4:5, [7,8], 5:length(od), [8,5]; filter = x->in(x,5:6))
+dxs = odict(2, 4:5, [7,8], 5:length(odict), [8,5];
+		filter = x->in(x,5:6))
 
 	OrderedDict{Symbol, String} with 2 entries:
 	  :Exp => "expensive"			 #  5
 	  :Frg => "forage"			 #  6
 
-dxs = od(2, 4:5, [7,8], 5:length(od), [8,5]; keep = :last, filter = x->in(x,5:6))
+dxs = odict(2, 4:5, [7,8], 5:length(odict), [8,5];
+		keep = :last,
+		filter = x->in(x,5:6))
 
 	OrderedDict{Symbol, String} with 2 entries:
 	  :Frg => "forage"			 #  6
